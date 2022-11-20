@@ -3,6 +3,7 @@ var router = express.Router();
 
 const marcas=['0','x'];
 
+
 var estadoPizarra;
 var turnoLocal;
 var jugadores;
@@ -16,19 +17,19 @@ router.get('/', function(req, res, next)
 });
 
 /* Put empezar. */
-router.put('/empezar', function(request, response) 
+router.put('/empezar', async function(request, response) 
 {
-    jugadores=request.body;
+    jugadores=request.body;    
     movimientos=9;
     turnoLocal=jugadores[0]
-    
+    console.log(JSON.stringify(jugadores));
     estadoPizarra=[
       [' ',' ',' '],
       [' ',' ',' '],
       [' ',' ',' ']
       ];
      
-    response.setHeader('Content-Type', 'application/json')    
+  await  response.setHeader('Content-Type', 'application/json')    
     .send({
     'turno': turnoLocal,
     'estado': estadoPizarra     
@@ -38,16 +39,25 @@ router.put('/empezar', function(request, response)
 });
 
 /* Put movimiento. */
-router.put('/movimiento', function(request, response) 
+router.put('/movimiento', async function(request, response) 
 {
+  
+
   let columna=request.body.columna;
   let fila=request.body.fila;
   let respuesta={}
   let ganador=false;
   let empate=false;
   respuesta={}
-  //busqueda de ganador
+  
+  console.log(JSON.stringify(estadoPizarra))
 
+  if(columna==null || fila==null){
+    response.send().status(404);    
+    return;
+  }
+
+  //busqueda de ganador
   function buscarGanador()
   {
 
@@ -70,6 +80,7 @@ router.put('/movimiento', function(request, response)
   }
 
   //gestiono turnos  
+  
   if(turnoLocal==request.body.jugador)
   {
     if (estadoPizarra[fila][columna]==" ")
@@ -95,9 +106,10 @@ router.put('/movimiento', function(request, response)
         }  
     } 
   }
+  else{turnoLocal=turnoLocal;  }
   
   
-  buscarGanador();
+  await buscarGanador();
   if ((ganador==true)&&(empate==false))
         {
           respuesta={gana:request.body.jugador,estado:estadoPizarra}
@@ -108,6 +120,7 @@ router.put('/movimiento', function(request, response)
         }
   if ((ganador!=true)&&(empate==false))
         {
+          
           respuesta={'turno' : turnoLocal, 'estado': estadoPizarra}   
         }      
   

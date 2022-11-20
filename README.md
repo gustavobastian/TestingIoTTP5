@@ -12,4 +12,7 @@ Debe instalarse newman, en la consola de linux:
 npm install -g newman
 ```
 
-
+En una terminal, ejecutar:
+```
+npm start
+```

@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "4f7e9985-1f5d-43fe-90be-a6e6b08e6ef0",
+		"name": "Tateti-Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18591988"
+	},
+	"item": [
+		{
+			"name": "Get initical",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"test de obtención de respuesta Tateti\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.be.withBody;         ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inicio juego",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"test de Inicio Tateti\", function () {",
+							"    pm.response.to.have.status(200);     ",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;    ",
+							"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+							"    pm.expect(pm.response.json().estado.length).eql(3);",
+							"    pm.expect(pm.response.json().turno).eql('Juan');",
+							"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+							"    pm.expect(pm.response.json().estado).eql(",
+							"        [",
+							"        [\" \", \" \", \" \" ],",
+							"        [\" \", \" \", \" \" ],",
+							"        [\" \", \" \", \" \" ]",
+							"    ]",
+							"",
+							"    );   ",
+							"     ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " [\"Juan\",\"Pedro\"]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/empezar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"empezar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "muevejugador1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"test primer movimiento correcto\", function () {",
+							"    pm.response.to.have.status(200);     ",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;    ",
+							"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+							"    pm.expect(pm.response.json().estado.length).eql(3);",
+							"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+							"    pm.expect(pm.response.json().estado).eql(",
+							"        [",
+							"        [\"x\", \" \", \" \" ],",
+							"        [\" \", \" \", \" \" ],",
+							"        [\" \", \" \", \" \" ]",
+							"    ]",
+							"",
+							"    );   ",
+							"     ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							"",
+							"pm.sendRequest({",
+							"    url:\"http://localhost:3000/empezar\",",
+							"    method:\"PUT\",",
+							"    header:{",
+							"        \"Content-Type\":\"application/json\",",
+							"        \"Origin\":\"http://localhost:3000\"",
+							"    },",
+							"    body:JSON.stringify([\"Juan\",\"Pedro\"])",
+							"}),",
+							"function(err,response){   ",
+							"    console.log(response)",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " { \"jugador\": \"Juan\", \"columna\": 0, \"fila\": 0 }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/movimiento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movimiento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "muevejugador2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"test: no se debería modificar pizarra, error de turno\", function () {",
+							"    pm.response.to.have.status(200);     ",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;    ",
+							"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+							"    pm.expect(pm.response.json().estado.length).eql(3);",
+							"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+							"    pm.expect(pm.response.json().estado).eql(",
+							"        [",
+							"        [\" \", \" \", \" \" ],",
+							"        [\" \", \" \", \" \" ],",
+							"        [\" \", \" \", \" \" ]",
+							"    ]",
+							"",
+							"    );   ",
+							"     ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"",
+							"",
+							"pm.sendRequest({",
+							"    url:\"http://localhost:3000/empezar\",",
+							"    method:\"PUT\",",
+							"    header:{",
+							"        \"Content-Type\":\"application/json\",",
+							"        \"Origin\":\"http://localhost:3000\"",
+							"    },",
+							"    body:JSON.stringify([\"Juan\",\"Pedro\"])",
+							"}),",
+							"function(err,response){   ",
+							"    console.log(response)",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " { \"jugador\": \"Pedro\", \"columna\": 0, \"fila\": 0 }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/movimiento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movimiento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "muevejugador2 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"test: debería poseer 2 turnos\", function () {",
+							"    pm.response.to.have.status(200);     ",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;    ",
+							"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+							"    pm.expect(pm.response.json().estado.length).eql(3);",
+							"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+							"    pm.expect(pm.response.json().estado).eql(",
+							"        [",
+							"        [\"x\", \"0\", \" \" ],",
+							"        [\" \", \" \", \" \" ],",
+							"        [\" \", \" \", \" \" ]",
+							"    ]",
+							"",
+							"    );   ",
+							"     ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.sendRequest({",
+							"    url:\"http://localhost:3000/empezar\",",
+							"    method:\"PUT\",",
+							"    header:{",
+							"        \"Content-Type\":\"application/json\",",
+							"        \"Origin\":\"http://localhost:3000\"",
+							"    },",
+							"    body:JSON.stringify([\"Juan\",\"Pedro\"])",
+							"}),",
+							" function(err,response){   ",
+							"    console.log(\"aqui\")   ",
+							"    console.log(response)",
+							"}",
+							"",
+							"",
+							"",
+							"    ",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " { \"jugador\": \"Pedro\", \"columna\": 1, \"fila\": 0 }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/movimiento",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movimiento"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
