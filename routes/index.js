@@ -95,6 +95,7 @@ router.get('/', function(req, res, next)
 /* Put empezar. */
 router.put('/empezar', function(request, response) 
 {
+    console.log("movimiento")
     jugadores=request.body;
     movimientos=9;
     turnoLocal=0
@@ -120,6 +121,13 @@ router.put('/empezar', function(request, response)
 /* Put movimiento. */
 router.put('/movimiento', function(request, response) 
 {
+  console.log("movimiento")
+  if(request.body.jugador==null)
+  {
+     response.send().status(400);
+     return;
+    }
+
   let columna=request.body.columna;
   let fila=request.body.fila;
   let respuesta={}

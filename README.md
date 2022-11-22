@@ -16,3 +16,8 @@ En una terminal, ejecutar:
 ```
 npm start
 ```
+
+Para realizar los test con newman:
+```
+newman run ./postman-collections/Tateti-Test.postman_collection.json −r cli,htmlextra
+```

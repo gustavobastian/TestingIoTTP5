@@ -7,16 +7,1504 @@
 	},
 	"item": [
 		{
+			"name": "multiplemovimientos",
+			"item": [
+				{
+					"name": "1er Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									"pm.sendRequest({",
+									"    url:\"http://localhost:3000/empezar\",",
+									"    method:\"PUT\",",
+									"    header:{",
+									"        \"Content-Type\":\"application/json\",",
+									"        \"Origin\":\"http://localhost:3000\"",
+									"    },",
+									"    body:JSON.stringify([\"Juan\",\"Pedro\"])",
+									"}),",
+									"function(err,response){   ",
+									"    console.log(response)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test primer movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"",
+									"    );   ",
+									"     ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " { \"jugador\": \"Juan\", \"columna\": 0, \"fila\": 0 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2do Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test segundo movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \" \" ],",
+									"        [\" \", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"",
+									"    );   ",
+									"     ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " { \"jugador\": \"Pedro\", \"columna\": 1, \"fila\": 0 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ganador jugador 1",
+			"item": [
+				{
+					"name": "1er Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									"pm.sendRequest({",
+									"    url:\"http://localhost:3000/empezar\",",
+									"    method:\"PUT\",",
+									"    header:{",
+									"        \"Content-Type\":\"application/json\",",
+									"        \"Origin\":\"http://localhost:3000\"",
+									"    },",
+									"    body:JSON.stringify([\"Juan\",\"Pedro\"])",
+									"}),",
+									"function(err,response){   ",
+									"    console.log(response)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test primer movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Juan\", \"columna\": 0, \"fila\": 0 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2do Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 2do movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \" \" ],",
+									"        [\" \", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"jugador\": \"Pedro\", \"columna\": 1, \"fila\": 0 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3er Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 3er movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \" \" ],",
+									"        [\"x\", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"jugador\": \"Juan\", \"columna\": 0, \"fila\": 1 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4to Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 4to movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \" \" ],",
+									"        [\"x\", \"0\", \" \" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Pedro\", \"columna\": 1, \"fila\": 1 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5to Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 5to movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().gana).eql(\"Juan\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \" \" ],",
+									"        [\"x\", \"0\", \" \" ],",
+									"        [\"x\", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Juan\", \"columna\": 0, \"fila\": 2 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ganador jugador 2",
+			"item": [
+				{
+					"name": "1er Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									"pm.sendRequest({",
+									"    url:\"http://localhost:3000/empezar\",",
+									"    method:\"PUT\",",
+									"    header:{",
+									"        \"Content-Type\":\"application/json\",",
+									"        \"Origin\":\"http://localhost:3000\"",
+									"    },",
+									"    body:JSON.stringify([\"Juan\",\"Pedro\"])",
+									"}),",
+									"function(err,response){   ",
+									"    console.log(response)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test primer movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Juan\", \"columna\": 0, \"fila\": 0 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2do Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 2do movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \" \" ],",
+									"        [\" \", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"jugador\": \"Pedro\", \"columna\": 1, \"fila\": 0 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3er Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 3er movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \" \" ],",
+									"        [\" \", \" \", \"x\" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"jugador\": \"Juan\", \"columna\": 2, \"fila\": 1 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4to Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 4to movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \" \" ],",
+									"        [\" \", \"0\", \"x\" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Pedro\", \"columna\": 1, \"fila\": 1 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5to Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 5to movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");    ",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \" \" ],",
+									"        [\" \", \"0\", \"x\" ],",
+									"        [\"x\", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Juan\", \"columna\": 0, \"fila\": 2 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6to Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 6to movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().gana).eql(\"Pedro\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \" \" ],",
+									"        [\" \", \"0\", \"x\" ],",
+									"        [\"x\", \"0\", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Pedro\", \"columna\": 1, \"fila\": 2 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "empate",
+			"item": [
+				{
+					"name": "1er Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									"pm.sendRequest({",
+									"    url:\"http://localhost:3000/empezar\",",
+									"    method:\"PUT\",",
+									"    header:{",
+									"        \"Content-Type\":\"application/json\",",
+									"        \"Origin\":\"http://localhost:3000\"",
+									"    },",
+									"    body:JSON.stringify([\"Juan\",\"Pedro\"])",
+									"}),",
+									"function(err,response){   ",
+									"    console.log(response)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test primer movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Juan\", \"columna\": 0, \"fila\": 0 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2do Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 2do movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \" \" ],",
+									"        [\" \", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"jugador\": \"Pedro\", \"columna\": 1, \"fila\": 0 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3er Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test tercer movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \"x\" ],",
+									"        [\" \", \" \", \" \" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"jugador\": \"Juan\", \"columna\": 2, \"fila\": 0 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4to Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 4to movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \"x\" ],",
+									"        [\"0\", \" \",\" \" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Pedro\", \"columna\": 0, \"fila\": 1 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5to Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 5to movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");    ",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \"x\" ],",
+									"        [\"0\", \"x\", \" \" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Juan\", \"columna\": 1, \"fila\": 1 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6to Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 6to movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    //pm.expect(pm.response.json().gana).eql(\"Pedro\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \"x\" ],",
+									"        [\"0\", \"x\", \"0\" ],",
+									"        [\" \", \" \", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Pedro\", \"columna\": 2, \"fila\": 1 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7mo Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 7mo movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    //pm.expect(pm.response.json().gana).eql(\"Pedro\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \"x\" ],",
+									"        [\"0\", \"x\", \"0\" ],",
+									"        [\" \", \"x\", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Juan\", \"columna\": 1, \"fila\": 2 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8vo Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 8vo movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
+									"    //pm.expect(pm.response.json().gana).eql(\"Pedro\");",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \"x\" ],",
+									"        [\"0\", \"x\", \"0\" ],",
+									"        [\"0\", \"x\", \" \" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Pedro\", \"columna\": 0, \"fila\": 2 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9no Movimiento",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"test 9no movimiento correcto\", function () {",
+									"    pm.response.to.have.status(200);     ",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;    ",
+									"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");    ",
+									"    pm.expect(pm.response.json().empate).eql(\"empate\");  ",
+									"    pm.expect(pm.response.json().estado.length).eql(3);",
+									"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
+									"    pm.expect(pm.response.json().estado).eql(",
+									"        [",
+									"        [\"x\", \"0\", \"x\" ],",
+									"        [\"0\", \"x\", \"0\" ],",
+									"        [\"0\", \"x\", \"x\" ]",
+									"    ]",
+									"    );   ",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"jugador\": \"Juan\", \"columna\": 2, \"fila\": 2 }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movimiento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movimiento"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Get initical",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"test de obtención de respuesta Tateti\", function () {",
+							"pm.test(\"test de prueba de servidor Tateti\", function () {",
 							"    pm.response.to.have.status(200);",
 							"    pm.response.to.not.be.error;",
-							"    pm.response.to.be.withBody;         ",
+							"    pm.response.to.be.withBody;    ",
+							"    ",
 							"});"
 						],
 						"type": "text/javascript"
@@ -242,90 +1730,6 @@
 				"body": {
 					"mode": "raw",
 					"raw": " { \"jugador\": \"Pedro\", \"columna\": 0, \"fila\": 0 }",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/movimiento",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"movimiento"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "muevejugador2 Copy",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"test: debería poseer 2 turnos\", function () {",
-							"    pm.response.to.have.status(200);     ",
-							"    pm.response.to.not.be.error;",
-							"    pm.response.to.be.withBody;",
-							"    pm.response.to.be.json;    ",
-							"    pm.expect(pm.response.json().estado).not.eql(\"No Auth\");",
-							"    pm.expect(pm.response.json().estado.length).eql(3);",
-							"    pm.expect(pm.response.json().estado[1].length).eql(3);   ",
-							"    pm.expect(pm.response.json().estado).eql(",
-							"        [",
-							"        [\"x\", \"0\", \" \" ],",
-							"        [\" \", \" \", \" \" ],",
-							"        [\" \", \" \", \" \" ]",
-							"    ]",
-							"",
-							"    );   ",
-							"     ",
-							"});",
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"exec": [
-							"pm.sendRequest({",
-							"    url:\"http://localhost:3000/empezar\",",
-							"    method:\"PUT\",",
-							"    header:{",
-							"        \"Content-Type\":\"application/json\",",
-							"        \"Origin\":\"http://localhost:3000\"",
-							"    },",
-							"    body:JSON.stringify([\"Juan\",\"Pedro\"])",
-							"}),",
-							" function(err,response){   ",
-							"    console.log(\"aqui\")   ",
-							"    console.log(response)",
-							"}",
-							"",
-							"",
-							"",
-							"    ",
-							"",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": " { \"jugador\": \"Pedro\", \"columna\": 1, \"fila\": 0 }",
 					"options": {
 						"raw": {
 							"language": "json"
